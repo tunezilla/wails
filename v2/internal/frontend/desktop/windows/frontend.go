@@ -431,8 +431,6 @@ func (f *Frontend) setupChromium() {
 		}
 	}
 
-	disableFeatues = append(disableFeatues, "RendererCodeIntegrity") // shotgun: https://github.com/MicrosoftEdge/WebView2Feedback/issues/3318#issuecomment-1518347038
-
 	if len(disableFeatues) > 0 {
 		arg := fmt.Sprintf("--disable-features=%s", strings.Join(disableFeatues, ","))
 		chromium.AdditionalBrowserArgs = append(chromium.AdditionalBrowserArgs, arg)
