@@ -436,8 +436,6 @@ func (f *Frontend) setupChromium() {
 		chromium.AdditionalBrowserArgs = append(chromium.AdditionalBrowserArgs, arg)
 	}
 
-	chromium.AdditionalBrowserArgs = append(chromium.AdditionalBrowserArgs, "--no-proxy-server") // shotgun
-
 	chromium.MessageCallback = f.processMessage
 	chromium.WebResourceRequestedCallback = f.processRequest
 	chromium.NavigationCompletedCallback = f.navigationCompleted
