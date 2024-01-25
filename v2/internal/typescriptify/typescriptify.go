@@ -881,6 +881,7 @@ func (t *typeScriptClassBuilder) addInitializerFieldLine(fld, initializer string
 }
 
 func (t *typeScriptClassBuilder) addField(fld, fldType string, isAnyType bool) {
+	isArray := strings.HasSuffix(fldType, "[]")
 	isOptional := strings.HasSuffix(fld, "?")
 	strippedFieldName := strings.ReplaceAll(fld, "?", "")
 	if !regexp.MustCompile(jsVariableNameRegex).Match([]byte(strippedFieldName)) {
@@ -892,6 +893,8 @@ func (t *typeScriptClassBuilder) addField(fld, fldType string, isAnyType bool) {
 	if isAnyType {
 		fldType = strings.Split(fldType, ".")[0]
 		t.fields = append(t.fields, fmt.Sprint(t.indent, "// Go type: ", fldType, "\n", t.indent, fld, ": any;"))
+	} else if isArray {
+		t.fields = append(t.fields, fmt.Sprint(t.indent, fld, ": ", fldType+"|null", ";"))
 	} else {
 		t.fields = append(t.fields, fmt.Sprint(t.indent, fld, ": ", fldType, ";"))
 	}
