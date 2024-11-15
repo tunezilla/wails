@@ -9,6 +9,6 @@ import "github.com/pkg/browser"
 func (f *Frontend) BrowserOpenURL(url string) {
 	// Specific method implementation
 	if err := browser.OpenURL(url); err != nil {
-		f.logger.Error(err.Error())
+		f.logger.Error("Unable to open default system browser")
 	}
 }
