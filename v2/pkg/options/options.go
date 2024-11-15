@@ -86,6 +86,9 @@ type App struct {
 
 	SingleInstanceLock *SingleInstanceLock
 
+	// args == ICoreWebView2ProcessFailedEventArgs
+	OnChromiumProcessFailed func(args interface{}) string
+
 	Windows *windows.Options
 	Mac     *mac.Options
 	Linux   *linux.Options

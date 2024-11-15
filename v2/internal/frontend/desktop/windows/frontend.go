@@ -518,6 +518,14 @@ func (f *Frontend) setupChromium() {
 				f.ShowWindow()
 			}
 		}
+
+		if f.frontendOptions.OnChromiumProcessFailed != nil {
+			message := f.frontendOptions.OnChromiumProcessFailed(args)
+			if message != "" {
+				winc.Errorf(f.mainWindow, message)
+				os.Exit(-1)
+			}
+		}
 	}
 
 	chromium.Embed(f.mainWindow.Handle())
